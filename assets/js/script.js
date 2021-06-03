@@ -1,4 +1,5 @@
 var tasks = {};
+console.log('this is the document', window.document);
 
 var createTask = function (taskText, taskDate, taskList) {
   // create elements that make up a task item
@@ -19,17 +20,12 @@ var createTask = function (taskText, taskDate, taskList) {
 };
 
 var loadTasks = function () {
-  tasks = JSON.parse(localStorage.getItem('tasks'));
-
-  // if nothing in localStorage, create a new object to track all task status arrays
-  if (!tasks) {
-    tasks = {
-      toDo: [],
-      inProgress: [],
-      inReview: [],
-      done: [],
-    };
-  }
+  tasks = JSON.parse(localStorage.getItem('tasks')) || {
+    toDo: [],
+    inProgress: [],
+    inReview: [],
+    done: [],
+  };
 
   // loop over object properties
   $.each(tasks, function (list, arr) {
@@ -169,13 +165,14 @@ $('#task-form-modal .btn-primary').click(function () {
 
 // task text was clicked
 $('.list-group').on('click', 'p', function () {
+  console.log('clicked', this);
   // get current text of p element
   var text = $(this).text().trim();
-
+  console.log('text', text);
   // replace p element with a new textarea
   var textInput = $('<textarea>').addClass('form-control').val(text);
   $(this).replaceWith(textInput);
-
+  console.log('textinput', textInput);
   // auto focus new element
   textInput.trigger('focus');
 });
@@ -184,7 +181,7 @@ $('.list-group').on('click', 'p', function () {
 $('.list-group').on('blur', 'textarea', function () {
   // get current value of textarea
   var text = $(this).val();
-
+  //attr(), which is returning the ID,
   // get status type and position in the list
   var status = $(this).closest('.list-group').attr('id').replace('list-', '');
   var index = $(this).closest('.list-group-item').index();
@@ -226,7 +223,7 @@ $('.list-group').on('click', 'span', function () {
 });
 
 // value of due date was changed
-$('.list-group').on('change', "input[type='text']", function () {
+$('.list-group').on('blur', "input[type='text']", function () {
   var date = $(this).val();
 
   // get status type and position in the list
@@ -259,3 +256,4 @@ $('#remove-tasks').on('click', function () {
 loadTasks();
 
 $('modaDueDate').datepicker();
+console.log('this is the document', window.document);
