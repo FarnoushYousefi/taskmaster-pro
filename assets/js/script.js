@@ -159,4 +159,8 @@ $('.card .list-group').sortable({
   connectWith: $('.card .list-group'),
 });
 // load tasks for the first time
+$('.list-group').on('click', 'p', function () {
+  var text = $(this).text();
+  console.log(text);
+});
 loadTasks();

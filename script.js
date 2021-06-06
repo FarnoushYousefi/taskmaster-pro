@@ -96,9 +96,18 @@ $('.list-group').on('blur', 'textarea', function () {
 
   // get status type and position in the list
   var status = $(this).closest('.list-group').attr('id').replace('list-', '');
+
+  console.log(status);
+
+  // get the task's position in the list of other li elements
   var index = $(this).closest('.list-group-item').index();
 
   // update task in array and re-save to localstorage
+  // tasks[status] returns an array (e.g., toDo).
+  //tasks[status][index] returns the object at the given index in the array.
+  //tasks[status][index].text returns the text property of the object at the given index.
+
+  //console.log(tasks[status][index]);
   tasks[status][index].text = text;
   saveTasks();
 
@@ -192,6 +201,8 @@ $('.card .list-group').sortable({
     console.log(tempArr);
   },
 });
+
+loadTasks();
 
 // load tasks for the first time
 loadTasks();
