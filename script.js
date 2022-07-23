@@ -41,7 +41,7 @@ var loadTasks = function() {
     });
   });
 };
-
+//The saveTasks() function simply saves the tasks object in localStorage, as we can see here:
 var saveTasks = function() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
@@ -178,6 +178,10 @@ $("#task-form-modal .btn-save").click(function() {
 });
 
 // task text was clicked
+//In jQuery's example, click event listeners on all <tr> elements are delegated to a parent <tbody> element—hence the extra argument in the on() method: $("#dataTable tbody").on("click", "tr"). We'll do something similar with the <p> elements, delegating clicks to the parent <ul> with class list-group.
+//In previous projects, we used event.target to get the affected element, and that'd certainly still work here. Another common trick (particularly when using jQuery) is to use the this keyword. We've used this in relation to objects to refer to themselves; DOM elements are objects too, so there's no reason why we can't use this in event callbacks.
+
+//Update the on() callback to look like this instead://
 $(".list-group").on("click", "p", function() {
   // get current text of p element
   var text = $(this)
@@ -185,6 +189,7 @@ $(".list-group").on("click", "p", function() {
     .trim();
 
   // replace p element with a new textarea
+  //While $("textarea") tells jQuery to find all existing <textarea> elements, as we've seen before, $("<textarea>") tells jQuery to create a new <textarea> element. The former uses the element name as a selector, the latter uses the HTML syntax for an opening tag to indicate the element to be created.
   var textInput = $("<textarea>").addClass("form-control").val(text);
   $(this).replaceWith(textInput);
 
