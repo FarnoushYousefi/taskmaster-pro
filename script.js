@@ -181,7 +181,7 @@ $("#task-form-modal .btn-save").click(function() {
 //In jQuery's example, click event listeners on all <tr> elements are delegated to a parent <tbody> element—hence the extra argument in the on() method: $("#dataTable tbody").on("click", "tr"). We'll do something similar with the <p> elements, delegating clicks to the parent <ul> with class list-group.
 //In previous projects, we used event.target to get the affected element, and that'd certainly still work here. Another common trick (particularly when using jQuery) is to use the this keyword. We've used this in relation to objects to refer to themselves; DOM elements are objects too, so there's no reason why we can't use this in event callbacks.
 
-//Update the on() callback to look like this instead://
+//Update the on() callback to look like this instead:
 $(".list-group").on("click", "p", function() {
   // get current text of p element
   var text = $(this)
@@ -208,7 +208,8 @@ $(".list-group").on("blur", "textarea", function() {
     .attr("id")
     .replace("list-", "");
     // get the task's position in the list of other li elements
-    //This blur event will trigger as soon as the user interacts with anything other than the <textarea> element. When that happens, we need to collect a few pieces of data: the current value of the element, the parent element's ID, and the element's position in the list. These data points will help us update the correct task in the tasks object.
+    //This blur event will trigger as soon as the user interacts with anything other than the <textarea> element. When that happens, we need to collect a few pieces of data: the current value of the element, 
+    //the parent element's ID, and the element's position in the list. These data points will help us update the correct task in the tasks object.
   var index = $(this)
     .closest(".list-group-item")
     .index();
@@ -216,7 +217,6 @@ $(".list-group").on("blur", "textarea", function() {
   // update task in array and re-save to localstorage
   //Because we don't know the values, we'll have to use the variable names as placeholders. Underneath the three variables, add the following lines:
   //tasks[status][index].text = text;
-  //
 
   //tasks is an object.
 
@@ -245,6 +245,9 @@ $(".list-group").on("click", "span", function() {
     .trim();
 
   // create new input element
+  //The main difference here is that we're creating an <input> element and using jQuery's attr() method to set it as type="text".
+  // In jQuery, attr() can serve two purposes. With one argument, it gets an attribute (e.g., attr("id")). 
+  //With two arguments, it sets an attribute (e.g., attr("type", "text")). 
   var dateInput = $("<input>")
     .attr("type", "text")
     .addClass("form-control")
