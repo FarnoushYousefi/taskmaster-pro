@@ -207,12 +207,25 @@ $(".list-group").on("blur", "textarea", function() {
     .closest(".list-group")
     .attr("id")
     .replace("list-", "");
+    // get the task's position in the list of other li elements
+    //This blur event will trigger as soon as the user interacts with anything other than the <textarea> element. When that happens, we need to collect a few pieces of data: the current value of the element, the parent element's ID, and the element's position in the list. These data points will help us update the correct task in the tasks object.
   var index = $(this)
     .closest(".list-group-item")
     .index();
 
   // update task in array and re-save to localstorage
-  tasks[status][index].text = text;
+  //Because we don't know the values, we'll have to use the variable names as placeholders. Underneath the three variables, add the following lines:
+  //tasks[status][index].text = text;
+  //
+
+  //tasks is an object.
+
+  //tasks[status] returns an array (e.g., toDo).
+
+  //tasks[status][index] returns the object at the given index in the array.
+
+  //tasks[status][index].text returns the text property of the object at the given index.
+
   saveTasks();
 
   // recreate p element
